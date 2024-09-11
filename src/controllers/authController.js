@@ -7,12 +7,13 @@ const nodemailer =  require('nodemailer');
 const asyncHandler = require('express-async-handler');
 const ROLES_LIST = require('../config/roles_list');
 const { v4: uuidv4 } = require('uuid'); 
+const Course = require('../models/Course');
 
 
 // Register a new user
 
 exports.register = async(req,res) =>{
-    const {firstName , lastName , email , password , mobile , type} = req.body;
+    const {firstName , lastName , email , password , mobile , type, course} = req.body;
 
     try{
         let user = await User.findOne({email});
@@ -27,14 +28,32 @@ exports.register = async(req,res) =>{
 
     
         const hashedPassword = await bcrypt.hash(password, salt);
+
+       
+ 
+const enrolledCourse = role == 1984 ? await Course.findOne({courseId : course}).select('_id').lean() : null;
+const prefix = enrolledCourse ? course : null;
+
+//Generate a unique 10 digit number
+
+let userIdSuffix;
+
+do {
+    userIdSuffix = Math.floor(Math.random() * 1000000000);
+  } while (await User.findOne({ username: `${prefix}${userIdSuffix}` }));
+
+  const userId = `${prefix}${userIdSuffix}`;
+
+        console.log(enrolledCourse);
         user = new User({
-            userID: uuidv4(),
+            userId: userId,
             fName: firstName,
             lName: lastName,
             email: email,
             password: hashedPassword ,
             mobile: mobile,
-            type: role
+            type: role,
+            course: enrolledCourse
         
         });
 
@@ -137,25 +156,28 @@ exports.verifyOtp = async(req,res) =>{
 
 // Login a user
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
+    const { userId, password } = req.body;
+
+  
 
     try {
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ userId });
+        console.log("user matching the user ID" , user);
         if (!user) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: 'Invalid credentials no user to match teh user id' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: 'Invalid credentials password is incorrect' });
         }
 
         console.log(user)
 
         const payload = {
             user: {
-                id: user.id,
-                userID: user.userID,  
+                id: user._id,
+                userId: user.userId,  
                 email: user.email,
                 type: user.type
             }   
@@ -209,8 +231,8 @@ exports.refresh = async (req,res) =>{
             {
                 user:{
                     email:foundUser.email,
-                    id:foundUser.id,
-                    userId:foundUser.userID,
+                    id:foundUser._id,
+                    userId:foundUser.userId,
                     type:foundUser.type
                 },
  

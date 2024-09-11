@@ -35,7 +35,7 @@ const userRoutes = require('./src/routes/userRoutes');
 app.use('/api/auth', authRoutes);   
 app.use('/api/student', studentRoutes);
 app.use('/api/academicStaff', astaffRoutes);
-app.use('/api/nonAcademicStaff', nAstaffRoutes);
+app.use('/api/nAStaff', nAstaffRoutes);
 app.use('/api/management', managementRoutes);
 app.use('/api/user', userRoutes);
 
