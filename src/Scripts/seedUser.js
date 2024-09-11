@@ -33,6 +33,7 @@ const seedUser = async () => {
         const type = await askQuestion('Enter user type (e.g., 5150 for admin): ');
         const course = await askQuestion('Enter course "SE"  or  "CY" (or leave blank): ');
         const semester = await askQuestion('Enter semester (or leave blank): ');
+        const department = await askQuestion('Enter department (or leave blank): ');
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(plainPassword, 10);
@@ -55,7 +56,8 @@ const seedUser = async () => {
             accountStatus,
             type: Number(type), // Convert type to number
             course: courseRef || null, // Handle empty course input
-            semester: semesterRef || null // Handle empty semester input
+            semester: semesterRef || null, // Handle empty semester input
+            department: department || null // Handle empty department input
         });
 
         // Save the new user to the database

@@ -179,7 +179,8 @@ exports.login = async (req, res) => {
                 id: user._id,
                 userId: user.userId,  
                 email: user.email,
-                type: user.type
+                type: user.type,
+                department: user.department
             }   
         };
 console.log(payload)

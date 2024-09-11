@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     semester:{type: mongoose.Schema.Types.ObjectId, ref: 'Semester'},
 
     //Non academic staff 
-   
+   department: { type: String , enum:['Admisssion' ,'Resource Management' , 'Administration' , 'Management' ]},
 
 
    

@@ -10,4 +10,5 @@ const ResourceSchema = new Schema({
     
 });
 
-module.exports = mongoose.model('Resource', ResourceSchema);
+// Check if the model already exists before defining it
+module.exports = mongoose.models.Resource || mongoose.model('Resource', ResourceSchema);
