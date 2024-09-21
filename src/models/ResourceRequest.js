@@ -18,4 +18,5 @@ const ResourceRequestSchema = new Schema({
   }, // End time of the requested slot
 });
 
-module.exports = mongoose.model('ResourceRequest', ResourceRequestSchema);
+module.exports = mongoose.models.ResourceRequest || mongoose.model('ResourceRequest', ResourceRequestSchema);
+

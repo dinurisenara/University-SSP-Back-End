@@ -20,7 +20,7 @@ exports.getStudentCountbyAcademicYear = async (req, res) => {
     
         // Step 2: Count the number of students in each academic year
         const studentCount = users.reduce((acc, user) => {
-            const yearNumber = user.semester.academicYear.yearNumber;
+            const yearNumber = user?.semester?.academicYear?.yearNumber;
     
             if (!acc[yearNumber]) {
                 acc[yearNumber] = 0;

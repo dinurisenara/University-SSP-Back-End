@@ -4,7 +4,7 @@ const ROLES_LIST = {
     "Student": 1984,
     "Academic_Staff": 2001,
     "NAcademicStaff": 2002,
-    "Management": 2003,
+    "Management": 2003,     
     
 };
 

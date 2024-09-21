@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     email : {type: String , unique: true , required: true},
     password : {type: String , required: true},
     mobile : {type: Number , required: true},    
-    accountStatus: {type: String , enum: ['active', 'inactive'], required: true},
+    accountStatus: {type: String , enum: ['active', 'inactive'],default: 'inactive'},
   
     type: { 
         type: Number, 
@@ -29,6 +29,10 @@ const UserSchema = new Schema({
 
     //Non academic staff 
    department: { type: String , enum:['Admisssion' ,'Resource Management' , 'Administration' , 'Management' ]},
+
+   //Academic Staff 
+
+   
 
 
    
