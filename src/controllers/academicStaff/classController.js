@@ -12,7 +12,28 @@ exports.getClasses = async (req, res) => {
     }
     
     try {
-        const classes = await Class.find({ academicStaff: academicStaffId.populate('academicStaff') });
+        const classes = await Class.find({ academicStaff: academicStaffId })
+        .populate([{
+          path: 'academicStaff', 
+          model: 'User', 
+          select: ['fName', 'lName']
+        }, {
+            path: 'semesterId', // Correct the path name to match the schema field
+            model: 'Semester', 
+            select: 'semesterId'
+          }, {
+            path: 'moduleId', // Correct the path name to 'moduleId'
+            model: 'Module', 
+            select: 'moduleName'
+          }, {
+            path: 'location', // Assuming 'location' is the correct field name in your schema
+            model: 'Resource', 
+            select: 'resourceName'
+          },{
+            path: 'students',
+            model: 'User',  // Assuming that the students are stored in the 'User' model
+            select: ['fName', 'lName', 'userId'] // Populate the fName and lName of each student
+          }]);
         console.log(classes)
         res.json(classes);
     } catch (error) {

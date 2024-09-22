@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(verifyJWT);
 
 router.get('/classes',verifyRole(ROLES_LIST.Academic_Staff),getClasses);
-router.put('/classes/fixed-schedule',verifyRole(ROLES_LIST.Academic_Staff),changeFixedSchedule);
+router.put('/classes/change-fixed-schedule',verifyRole(ROLES_LIST.Academic_Staff),changeFixedSchedule);
 router.get('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),getExtraSchedules);
 router.post('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),addExtraSchedule);
 router.delete('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),deleteExtraSchedule);
