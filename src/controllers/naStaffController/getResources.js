@@ -1,6 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const Resource = require('../../models/resource');
-const ResourceRequests = require('../../models/resourceRequest');
+const ResourceRequests = require('../../models/ResourceRequest');
 
 
 exports.getResources = async (req, res) => {
