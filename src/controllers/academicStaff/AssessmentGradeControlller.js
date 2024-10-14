@@ -4,6 +4,7 @@ const AssessmentGrades = require("../../models/AssessmentGrades");
 const User = require("../../models/User");
 
 
+
 exports.setAssessmentGrade = async (req, res) => {
     const { assessmentId, studentId, achievedMarks } = req.body;
 
@@ -22,16 +23,28 @@ exports.setAssessmentGrade = async (req, res) => {
         if (!student) {
             return res.status(404).json({ error: 'Student not found' });
         }
+        const existingGrade = await AssessmentGrades.findOne({ assessmentId, studentId });
+        let newAssessmentGrade;
+        let previousGrade ;
+        if (existingGrade) {
+            
+        // Update the assessment grade
+        previousGrade = existingGrade.achievedMarks;
+        existingGrade.achievedMarks = achievedMarks;
+        await existingGrade.save();
+            newAssessmentGrade = existingGrade;
+        }
+        else{
 
         // Insert the new assessment grade
-        const newAssessmentGrade = new AssessmentGrades({ assessmentId, studentId, achievedMarks });
+         newAssessmentGrade = new AssessmentGrades({ assessmentId, studentId, achievedMarks });
         await newAssessmentGrade.save();
-
+        }
         // Update the module grade based on the assessment weightage
         const weightage = assessment.weightage; // Assuming the assessment has a weightage field
         const moduleId = assessment.moduleId; // Assuming the assessment is tied to a module
 
-        const updatedModuleGrade = await updateModuleGrades(achievedMarks, weightage, studentId, moduleId);
+        const updatedModuleGrade = await updateModuleGrades(achievedMarks, weightage, studentId, moduleId , previousGrade);
         
         if (updatedModuleGrade) {
             res.json({ newAssessmentGrade, updatedModuleGrade });
@@ -47,13 +60,17 @@ exports.setAssessmentGrade = async (req, res) => {
 
 //Function to updte ethe modules grades with the assessment grade weightage
 
-async function updateModuleGrades(assessmentMark , weightage , studentId , moduleId){
+async function updateModuleGrades(assessmentMark , weightage , studentId , moduleId, previousGrade){
     try{
         const { gradeDocument, moduleGrade } = await getModuleGrade(studentId, moduleId);
     
         if(!moduleGrade){
             console.log('Module grade not found.');
             return null;
+        }
+        if(previousGrade){
+            // Update the grade using the assessment mark and weightage
+            moduleGrade.grade -= (previousGrade * (weightage/100));
         }
         
          // Update the grade using the assessment mark and weightage
@@ -87,7 +104,8 @@ async function getModuleGrade(studentId, moduleId) {
       if (gradeDocument) {
         const moduleGrade = gradeDocument.gradings.find(grading => grading.moduleId.toString() === moduleId.toString());
         return { gradeDocument, moduleGrade };
-      } else {
+      } 
+      else {
         // If no grade document found, create a new one
         console.log('No grade found for the specified student and module. Creating a new grade document.');
 

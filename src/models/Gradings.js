@@ -21,6 +21,8 @@ const gradingSchema = new Schema({
   }
 });
 
+
+
 // Define the grades schema for each student
 const gradesSchema = new Schema({
   studentId: { 
@@ -33,4 +35,12 @@ const gradesSchema = new Schema({
 
 
 
-module.exports = mongoose.model('Grade', gradesSchema);
+// Create models
+const Grading = mongoose.model('Grading', gradingSchema);
+const Grade = mongoose.model('Grade', gradesSchema);
+
+// Export the models
+module.exports = {
+  Grading,
+  Grade
+};
