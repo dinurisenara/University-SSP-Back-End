@@ -35,12 +35,4 @@ const gradesSchema = new Schema({
 
 
 
-// Create models
-const Grading = mongoose.model('Grading', gradingSchema);
-const Grade = mongoose.model('Grade', gradesSchema);
-
-// Export the models
-module.exports = {
-  Grading,
-  Grade
-};
+module.exports = mongoose.model('Grade', gradesSchema);
