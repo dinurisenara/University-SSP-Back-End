@@ -32,7 +32,7 @@ const UserSchema = new Schema({
 
    //Academic Staff 
 
-   
+   modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module' }],
 
 
    

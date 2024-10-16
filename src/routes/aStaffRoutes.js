@@ -7,6 +7,7 @@ const{getClasses,changeFixedSchedule,getExtraSchedules,addExtraSchedule, deleteE
 const { setAssessment, getAssesments } = require('../controllers/academicStaff/AssessmentController');
 const { setAssessmentGrade } = require('../controllers/academicStaff/AssessmentGradeControlller');
 const { getAssessmentStudents } = require('../controllers/academicStaff/getAssessmentStudents');
+const { getModulesForAssessment, getAssessingStaffMembers } = require('../controllers/academicStaff/AddAssessmentController');
 const router = express.Router(); 
 
 router.use(verifyJWT);   
@@ -21,6 +22,7 @@ router.post('/assessments/add-assessment',verifyRole(ROLES_LIST.Academic_Staff),
 router.get('/assessments/get-assessments',verifyRole(ROLES_LIST.Academic_Staff),getAssesments);
 router.post('/assessments/add-grade',verifyRole(ROLES_LIST.Academic_Staff),setAssessmentGrade);
 router.get('/assessments/get-students',verifyRole(ROLES_LIST.Academic_Staff),getAssessmentStudents);
-
+router.get('/assessments/get-modules-for-assessment',verifyRole(ROLES_LIST.Academic_Staff),getModulesForAssessment);
+router.get('/assessments/get-assessing-staff-members',verifyRole(ROLES_LIST.Academic_Staff),getAssessingStaffMembers);
 
 module.exports = router;

@@ -11,7 +11,7 @@ const AssessmentSchema = new mongoose.Schema({
     assessingStaffMember: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
     weightage: { type: Number, required: true },
     Date: { type: Date, required: true },
-    TotalMarks: { type: Number, required: true },
+    totalMarks: { type: Number, required: true },
 
 });
 
