@@ -7,6 +7,7 @@ const verifyRole = require('../middleware/verifyRoles');
 const { getGradesByStudentId, getModuleNameByModuleId } = require('../controllers/studentController/gradesController');
 const{calculateGPAByStudentId , getGradeDistributionByStudentId } = require('../controllers/studentController/gpaController');
 const{makeResourceRequests , getResourceRequestByStudentId} = require('../controllers/studentController/resourceManagementController');
+const { getAssessmentGrades } = require('../controllers/studentController/AssessmentGradesController');
 
 
 
@@ -20,4 +21,4 @@ router.get('/gpa',verifyRole(ROLES_LIST.Student),calculateGPAByStudentId);
 router.get('/gpa/chart',verifyRole(ROLES_LIST.Student),getGradeDistributionByStudentId);
 router.post('/resource-requests/create',verifyRole(ROLES_LIST.Student),makeResourceRequests);
 router.get('/resource-requests',verifyRole(ROLES_LIST.Student),getResourceRequestByStudentId);
-
+router.get('/assessments/get-assessment-grades',verifyRole(ROLES_LIST.Student),getAssessmentGrades);
