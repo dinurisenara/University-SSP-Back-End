@@ -6,9 +6,9 @@ const ResourceRequest = require("./../models/ResourceRequest");
 
 
 // GET: Fetch available resources
- exports.getAvailableResources = async (req, res) => {
+exports.getAvailableResources = async (req, res) => {
   try {
-    const resources = await UniResource.find({ availabilityStatus : "available"}); // Assuming 'active' status for resources
+    const resources = await UniResource.find({ availabilityStatus: "available" }); // Assuming 'active' status for resources
     res.json(resources);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch resources' });
@@ -39,25 +39,34 @@ exports.getAvailableTimeSlots = async (req, res) => {
   }
 
   try {
+
+    console.log("Date", date);
+
     // Convert the date to a Date object for querying
     const requestedDate = new Date(date);
-    const startOfDay = new Date(requestedDate.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(requestedDate.setHours(23, 59, 59, 999))
+    console.log("REquested Date", requestedDate);
 
-     // Fetch all existing resource requests for the resource on the selected date
-     const existingRequests = await ResourceRequest.find({
+    const startOfDay = new Date(requestedDate.getTime()); // Clone the date object
+    startOfDay.setHours(0, 0, 0, 0);
+    console.log("Start of Day", startOfDay);
+    const endOfDay = new Date(requestedDate.getTime()); // Clone again for end of day
+    endOfDay.setHours(23, 59, 59, 999);
+    console.log("End of Day", endOfDay);
+
+    // Fetch all existing resource requests for the resource on the selected date
+    const existingRequests = await ResourceRequest.find({
       resourceId,
       requestedStartTime: { $gte: startOfDay, $lte: endOfDay }
     });
 
     console.log(existingRequests)
 
-     // Define the full range of time slots (8 AM - 5 PM)
-     const startHour = 8;
-     const endHour = 17;
-     const fullTimeSlots = generateTimeSlots(startHour, endHour);
+    // Define the full range of time slots (8 AM - 5 PM)
+    const startHour = 8;
+    const endHour = 17;
+    const fullTimeSlots = generateTimeSlots(startHour, endHour);
 
-      // Filter out time slots that are already allocated
+    // Filter out time slots that are already allocated
     const allocatedSlots = existingRequests.map((request) => {
       const startTime = new Date(request.requestedStartTime).getHours();
       const endTime = new Date(request.requestedEndTime).getHours();
@@ -71,12 +80,11 @@ exports.getAvailableTimeSlots = async (req, res) => {
     );
 
     return res.json(availableTimeSlots);
-} catch (error) {
-  console.error(error);
-  return res.status(500).json({ error: 'Failed to fetch available time slots' });
-}
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Failed to fetch available time slots' });
+  }
 
 }
 
 
-  
