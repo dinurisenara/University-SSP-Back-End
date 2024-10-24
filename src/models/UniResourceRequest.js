@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ResourceRequestSchema = new Schema({
+const UniResourceRequestSchema = new Schema({
     studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the student user
     resourceId: { type: mongoose.Schema.Types.ObjectId, ref: 'UniResource', required: true  }, // Reference to the Resource    
     status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' }, // Status of the request
@@ -18,5 +18,4 @@ const ResourceRequestSchema = new Schema({
   }, // End time of the requested slot
 });
 
-module.exports =  mongoose.model('ResourceRequest', ResourceRequestSchema);
-
+module.exports =  mongoose.model('UniResourceRequest', UniResourceRequestSchema);

@@ -1,12 +1,14 @@
+const UniResource = require("../models/UniResource");
 const Resource = require("./../models/Resource");
 const ResourceRequest = require("./../models/ResourceRequest");
+
 
 
 
 // GET: Fetch available resources
  exports.getAvailableResources = async (req, res) => {
   try {
-    const resources = await Resource.find({ availabilityStatus : "available"}); // Assuming 'active' status for resources
+    const resources = await UniResource.find({ availabilityStatus : "available"}); // Assuming 'active' status for resources
     res.json(resources);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch resources' });
