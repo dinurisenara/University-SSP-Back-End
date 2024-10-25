@@ -33,16 +33,31 @@ exports.makeResourceRequests = async (req, res) => {
 
     try {
 
-        // Extract date part from requestDate
-        const requestDateObject = new Date(requestDate); // Create a Date object from requestDate
-        const requestDateOnly = requestDateObject.toISOString().split('T')[0]; // Get just the date part (YYYY-MM-DD)
+        // Create Date objects from the incoming request
+        const requestDateObject = new Date(requestDate); // This should be in UTC
+        const requestedStartTimeObject = new Date(requestedStartTime);
+        const requestedEndTimeObject = new Date(requestedEndTime);
 
-        // Combine the selected date with the requested start and end times
-        const startTime = new Date(`${requestDateOnly}T${new Date(requestedStartTime).toISOString().split('T')[1]}`);
-        const endTime = new Date(`${requestDateOnly}T${new Date(requestedEndTime).toISOString().split('T')[1]}`);
-
-        console.log('Start Time:', startTime);
-        console.log('End Time:', endTime);
+        // Extract date components from requestDateObject
+        const year = requestDateObject.getUTCFullYear();
+        const month = requestDateObject.getUTCMonth();
+        const day = requestDateObject.getUTCDate();
+        
+        // Extract time components from requestedStartTimeObject
+        const startHours = requestedStartTimeObject.getUTCHours();
+        const startMinutes = requestedStartTimeObject.getUTCMinutes();
+        const startSeconds = requestedStartTimeObject.getUTCSeconds();
+        
+        // Create a new startTime object by combining date and start time
+        const startTime = new Date(Date.UTC(year, month, day, startHours, startMinutes, startSeconds));
+        
+        // Extract time components from requestedEndTimeObject
+        const endHours = requestedEndTimeObject.getUTCHours();
+        const endMinutes = requestedEndTimeObject.getUTCMinutes();
+        const endSeconds = requestedEndTimeObject.getUTCSeconds();
+        
+        // Create a new endTime object by combining date and end time
+        const endTime = new Date(Date.UTC(year, month, day, endHours, endMinutes, endSeconds));        
 
         // Validate the created Date objects
         if (isNaN(startTime) || isNaN(endTime)) {
