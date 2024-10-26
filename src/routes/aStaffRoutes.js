@@ -2,8 +2,8 @@ const express = require('express');
 const verifyJWT = require('../middleware/authMiddleware');
 const verifyRole = require('../middleware/verifyRoles');
 const ROLES_LIST = require('../config/roles_list');
-const{getClasses,changeFixedSchedule,getExtraSchedules,addExtraSchedule, deleteExtraSchedule,updateExtraSchedule} = require('./../controllers/academicStaff/classController');
-
+const{getClasses,changeFixedSchedule,getExtraSchedules,addExtraSchedule, deleteExtraSchedule,updateExtraSchedule, getClassScheduleDetails} = require('./../controllers/academicStaff/classController');
+const { getLocations } = require('../controllers/academicStaff/classController');
 const { setAssessment, getAssesments } = require('../controllers/academicStaff/AssessmentController');
 const { setAssessmentGrade } = require('../controllers/academicStaff/AssessmentGradeControlller');
 const { getAssessmentStudents } = require('../controllers/academicStaff/getAssessmentStudents');
@@ -14,6 +14,8 @@ router.use(verifyJWT);
 
 router.get('/classes',verifyRole(ROLES_LIST.Academic_Staff),getClasses);
 router.put('/classes/change-fixed-schedule',verifyRole(ROLES_LIST.Academic_Staff),changeFixedSchedule);
+router.get('/classes/get-locations',verifyRole(ROLES_LIST.Academic_Staff),getLocations);
+router.get('/classes/class-schedules',verifyRole(ROLES_LIST.Academic_Staff),getClassScheduleDetails);
 router.get('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),getExtraSchedules);
 router.post('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),addExtraSchedule);
 router.delete('/classes/extra-schedules',verifyRole(ROLES_LIST.Academic_Staff),deleteExtraSchedule);

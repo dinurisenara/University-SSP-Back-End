@@ -1,6 +1,6 @@
 const UniResource = require("../models/UniResource");
-const Resource = require("./../models/Resource");
-const ResourceRequest = require("./../models/ResourceRequest");
+const UniResourceRequest = require("../models/UniResourceRequest");
+
 
 
 
@@ -16,17 +16,15 @@ exports.getAvailableResources = async (req, res) => {
 };
 
 // Helper function to generate time slots
-const generateTimeSlots = (start, end) => {
-  const slots = [];
-  let currentTime = start;
-
-  while (currentTime < end) {
-    const nextTime = currentTime + 1; // Assuming time slots are 1 hour apart
-    slots.push(`${currentTime}:00 - ${nextTime}:00`);
-    currentTime = nextTime;
+const generateTimeSlots = (startHour, endHour) => {
+  const timeSlots = [];
+  for (let hour = startHour; hour < endHour; hour++) {
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 || 12; // Convert 0-23 hour format to 1-12
+    const slot = `${formattedHour}:00 ${ampm} - ${formattedHour + 1}:00 ${ampm}`;
+    timeSlots.push(slot);
   }
-
-  return slots;
+  return timeSlots;
 };
 
 // Get available time slots for a resource
@@ -53,32 +51,52 @@ exports.getAvailableTimeSlots = async (req, res) => {
     endOfDay.setHours(23, 59, 59, 999);
     console.log("End of Day", endOfDay);
 
-    // Fetch all existing resource requests for the resource on the selected date
-    const existingRequests = await ResourceRequest.find({
+   // Fetch all existing resource requests for the resource on the selected date
+    const existingRequests = await UniResourceRequest.find({
       resourceId,
+      status:'approved',
       requestedStartTime: { $gte: startOfDay, $lte: endOfDay }
     });
-
-    console.log(existingRequests)
-
     // Define the full range of time slots (8 AM - 5 PM)
     const startHour = 8;
     const endHour = 17;
     const fullTimeSlots = generateTimeSlots(startHour, endHour);
 
     // Filter out time slots that are already allocated
-    const allocatedSlots = existingRequests.map((request) => {
-      const startTime = new Date(request.requestedStartTime).getHours();
-      const endTime = new Date(request.requestedEndTime).getHours();
-      return `${startTime}:00 - ${endTime}:00`;
+
+    const allocatedSlots = [];
+    // const allocatedSlots = existingRequests.map((request) => {
+    //   const startTime = new Date(request.requestedStartTime).getHours();
+    //   const endTime = new Date(request.requestedEndTime).getHours();
+    //   return `${startTime}:00 - ${endTime}:00`;
+    // });
+    
+    existingRequests.forEach((request) => {
+      const startTime = new Date(request.requestedStartTime);
+      const endTime = new Date(request.requestedEndTime);
+
+      // Generate time slots for the existing request
+      let currentStartHour = startTime.getHours();
+      const currentEndHour = endTime.getHours();
+      const ampmStart = currentStartHour >= 12 ? 'PM' : 'AM';
+      const ampmEnd = currentEndHour >= 12 ? 'PM' : 'AM';
+
+      // Add all slots from start to end hour
+      while (currentStartHour < currentEndHour) {
+        const formattedHour = currentStartHour % 12 || 12; // Convert 0-23 hour format to 1-12
+        const slot = `${formattedHour}:00 ${ampmStart} - ${formattedHour + 1}:00 ${ampmStart}`;
+        allocatedSlots.push(slot);
+        currentStartHour++;
+      }
     });
-
-
 
     const availableTimeSlots = fullTimeSlots.filter(
       (slot) => !allocatedSlots.includes(slot)
     );
-
+    
+    console.log("existing requests",existingRequests)
+    console.log("allocated slots",allocatedSlots);
+    console.log("available tie slots",availableTimeSlots);  
     return res.json(availableTimeSlots);
   } catch (error) {
     console.error(error);
