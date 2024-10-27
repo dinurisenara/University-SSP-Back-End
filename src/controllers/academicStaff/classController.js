@@ -205,7 +205,29 @@ exports.getClassScheduleDetails = async (req, res) => {
 };
 
 
+// get class details bt class Id
+exports.getClassDetails = async (req, res) => {
+    const { classId } = req.query;
+console.log(classId);
+    try {
+        const classDetails = await Class.findById(classId)
+            .populate({path:'academicStaff', model:'User', select: ['fName', 'lName']})
+            .populate({path:'students', model:'User', select:['fName', 'lName', 'userId']})
+            .populate({path:'location',model:'UniResource', select: ['resourceName']})
+            .populate('moduleId', ['moduleName'])
+            .populate('semesterId', ['semesterId']);
 
+        if (!classDetails) {
+            return res.status(404).json({ message: 'Class not found' });
+        }
+
+        res.json(classDetails);
+        console.log(classDetails);
+    } catch (error) {
+        console.error('Error fetching class details:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
 
 
 
