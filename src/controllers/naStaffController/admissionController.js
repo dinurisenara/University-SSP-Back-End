@@ -5,9 +5,10 @@ const nodemailer = require('nodemailer');
 exports.toggleAccountStatus = async (req, res) => {
     try {
         const { userId } = req.query; // Assuming you're passing the userId as a route param
-
+        console.log("userId for activating ",userId);
         // Find the user by userId
-        const user = await User.findOne({ userId });
+        const user = await User.findOne({ _id:userId });
+        console.log("user for activating ",user);
 
         if (!user) {
             return res.status(404).json({ message: 'User not found', success: false });
@@ -65,9 +66,7 @@ exports.getInactiveUsers = async (req, res) => {
 // Function to send an email to the user when account status is toggled to active
  const sendActivationEmail = async (userEmail , userId) => {
     try {
-        const userEmail = req.body.email; // Get the user's email from the request body
-        const userId = req.body.userId; // Get the user's ID from the request body
-        // Create a transporter for sending emails
+        
         const transporter = nodemailer.createTransport({
             service: 'gmail', // You can use your preferred email service
             auth: {

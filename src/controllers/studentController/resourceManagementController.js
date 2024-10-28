@@ -34,6 +34,9 @@ exports.makeResourceRequests = async (req, res) => {
     try {
 
         // Create Date objects from the incoming request
+        console.log(requestDate);
+        console.log(requestedStartTime);
+        console.log(requestedEndTime);
         const requestDateObject = new Date(requestDate); // This should be in UTC
         const requestedStartTimeObject = new Date(requestedStartTime);
         const requestedEndTimeObject = new Date(requestedEndTime);
