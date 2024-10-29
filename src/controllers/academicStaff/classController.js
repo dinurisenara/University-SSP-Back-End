@@ -11,6 +11,7 @@ exports.getClasses = async (req, res) => {
     if (!academicStaffId) {
         return res.status(400).json({ error: 'Academic Staff ID is required' });
     }
+    console.log("Controller for class", academicStaffId);
 
     try {
         const classes = await Class.find({ academicStaff: academicStaffId })
@@ -28,14 +29,15 @@ exports.getClasses = async (req, res) => {
                 select: 'moduleName'
             }, {
                 path: 'location', // Assuming 'location' is the correct field name in your schema
-                model: 'Resource',
+                model: 'UniResource',
                 select: 'resourceName'
             }, {
                 path: 'students',
                 model: 'User',  // Assuming that the students are stored in the 'User' model
                 select: ['fName', 'lName', 'userId'] // Populate the fName and lName of each student
             }]);
-        
+        console.log("Classes:", classes);
+
         res.json(classes);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch classes' });
@@ -64,7 +66,7 @@ exports.changeFixedSchedule = async (req, res) => {
 
 exports.getExtraSchedules = async (req, res) => {
     const { academicStaffId } = req.query;
-    
+
     if (!academicStaffId) {
         return res.status(400).json({ error: 'Academic Staff ID is required' });
     }
@@ -86,7 +88,7 @@ exports.getExtraSchedules = async (req, res) => {
             .populate({
                 path: 'classId',
                 model: 'Class',
-                select: ['className','classId' ,'moduleId', 'semesterId', 'description', 'fixedSchedule'] // Include fields you need
+                select: ['className', 'classId', 'moduleId', 'semesterId', 'description', 'fixedSchedule'] // Include fields you need
             })
             .populate({
                 path: 'location', // Populate location for extra schedules
@@ -94,7 +96,7 @@ exports.getExtraSchedules = async (req, res) => {
                 select: ['resourceName'] // Select relevant fields from Resource model
             });
 
-        console.log("Extra Schedules:", extraSchedules)
+        
 
         // Check if schedules are found
         if (extraSchedules.length === 0) {
@@ -208,12 +210,12 @@ exports.getClassScheduleDetails = async (req, res) => {
 // get class details bt class Id
 exports.getClassDetails = async (req, res) => {
     const { classId } = req.query;
-console.log(classId);
+    console.log(classId);
     try {
         const classDetails = await Class.findById(classId)
-            .populate({path:'academicStaff', model:'User', select: ['fName', 'lName']})
-            .populate({path:'students', model:'User', select:['fName', 'lName', 'userId']})
-            .populate({path:'location',model:'UniResource', select: ['resourceName']})
+            .populate({ path: 'academicStaff', model: 'User', select: ['fName', 'lName'] })
+            .populate({ path: 'students', model: 'User', select: ['fName', 'lName', 'userId'] })
+            .populate({ path: 'location', model: 'UniResource', select: ['resourceName'] })
             .populate('moduleId', ['moduleName'])
             .populate('semesterId', ['semesterId']);
 

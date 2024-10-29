@@ -6,8 +6,8 @@ const ClassSchema = new mongoose.Schema({
     moduleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Module' },    
     semesterId: { type: mongoose.Schema.Types.ObjectId, ref: 'Semester' },
     description: String,
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
-    academicStaff: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AcademicStaff' }], 
+    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    academicStaff: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
     location:{type: mongoose.Schema.Types.ObjectId, ref: 'Resource'},
     fixedSchedule: {
     dayOfWeek: { type: String, required: true },  // e.g., Monday, Tuesday
