@@ -22,7 +22,7 @@ exports.toggleAccountStatus = async (req, res) => {
 
         // If the account was activated, send the activation email
         if (user.accountStatus === 'active') {
-            await sendActivationEmail(user.email, userId); // Call email function
+            await sendActivationEmail(user.email, user.userId); // Call email function
         }
 
         return res.status(200).json({

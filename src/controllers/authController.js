@@ -163,6 +163,15 @@ exports.login = async (req, res) => {
     try {
         let user = await User.findOne({ userId });
         console.log("user matching the user ID" , user);
+
+        if(!user){
+            return res.status(400).json({msg: 'Invalid credentials no user to match teh user id'});
+        }
+
+        if(user.accountStatus == 'inactive'){
+            return res.status(400).json({msg: 'Account is inactive'});
+        }
+        
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials no user to match teh user id' });
         }
@@ -203,7 +212,7 @@ console.log(payload)
         res.json({ accessToken });
     } catch (error) {
         console.error(error.message);
-        res.status(500).send('Server error');
+        res.status(500).json({msg:'Server Error'});
     }
 };
 
@@ -236,7 +245,7 @@ exports.refresh = async (req,res) =>{
                     userId:foundUser.userId,
                     type:foundUser.type
                 },
- 
+   
             
             }, process.env.JWT_SECRET,{expiresIn:'1h'}
         )
