@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  },
+  "courseId": "SE",
+  "courseName": "Software Engineering",
+  "description": "A course on Software Engineering principles and practices.",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  },
+  "courseId": "CY",
+  "courseName": "Cybersecurity",
+  "description": "A course on Cybersecurity principles and practices.",
+  "__v": 1
+}]

@@ -1,25 +1,12 @@
 [{
   "_id": {
-    "$oid": "66e0f9875433d21542edda8d"
-  },
-  "resourceName": "Auditorium",
-  "resourceType": "Facility",
-  "availabilityStatus": "maintenance",
-  "description": "A 500-seat auditorium currently under maintenance for renovation.",
-  "resourceOwner": {
-    "$oid": "66dee1acc685b5053a80380a"
-  }
-},{
-  "_id": {
     "$oid": "66e0f9875433d21542edda8e"
   },
   "resourceName": "Network Lab",
   "resourceType": "Lab",
   "availabilityStatus": "available",
   "description": "A state-of-the-art lab designed for chemistry experiments and research.",
-  "resourceOwner": {
-    "$oid": "66e0de82d065586fbeff04d2"
-  }
+  "__v": 0
 },{
   "_id": {
     "$oid": "66e0f9875433d21542edda8a"
@@ -28,9 +15,7 @@
   "resourceType": "Library",
   "availabilityStatus": "available",
   "description": "The central library with a vast collection of books, journals, and digital resources.",
-  "resourceOwner": {
-    "$oid": "66dee1acc685b5053a80380a"
-  }
+  "__v": 0
 },{
   "_id": {
     "$oid": "66e0f9875433d21542edda8b"
@@ -39,9 +24,16 @@
   "resourceType": "Lab",
   "availabilityStatus": "available",
   "description": "A well-equipped lab with high-performance machines for students and researchers.",
-  "resourceOwner": {
-    "$oid": "66e0de82d065586fbeff04d2"
-  }
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66e0f9875433d21542edda8d"
+  },
+  "resourceName": "Auditorium",
+  "resourceType": "Facility",
+  "availabilityStatus": "maintenance",
+  "description": "A 500-seat auditorium currently under maintenance for renovation.",
+  "__v": 0
 },{
   "_id": {
     "$oid": "66e0f9875433d21542edda8c"
@@ -50,7 +42,5 @@
   "resourceType": "SportingUtility",
   "availabilityStatus": "available",
   "description": "A full-size football ground used for practice and university matches.",
-  "resourceOwner": {
-    "$oid": "66e0e61d95a2d78f47227115"
-  }
+  "__v": 0
 }]

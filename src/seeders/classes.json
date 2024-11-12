@@ -1,0 +1,89 @@
+[{
+  "_id": {
+    "$oid": "66ed51d09e05fde7d6b415d5"
+  },
+  "classId": "SEY1S1C1",
+  "className": "Introduction to Programming Class",
+  "moduleId": {
+    "$oid": "66cd98ad4e86f78c848d0059"
+  },
+  "semesterId": {
+    "$oid": "66cd98ad4e86f78c848d004c"
+  },
+  "description": "Class for Introduction to Programming",
+  "location": {
+    "$oid": "66e0f9875433d21542edda8b"
+  },
+  "fixedSchedule": {
+    "dayOfWeek": "Tuesday",
+    "startTime": "8:30 AM",
+    "endTime": "10:30 AM"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66ed51d09e05fde7d6b415d6"
+  },
+  "classId": "SEY2S1C2",
+  "className": "Database Management Systems Class",
+  "moduleId": {
+    "$oid": "66cd98ad4e86f78c848d005e"
+  },
+  "semesterId": {
+    "$oid": "66cd98ad4e86f78c848d004e"
+  },
+  "description": "Class for Database Management Systems",
+  "location": {
+    "$oid": "66e0f9875433d21542edda8b"
+  },
+  "fixedSchedule": {
+    "dayOfWeek": "Monday",
+    "startTime": "10:00 AM",
+    "endTime": "12:00 PM"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66ed51d09e05fde7d6b415d7"
+  },
+  "classId": "CY1S1C1",
+  "className": "Fundamentals of Cybersecurity Class",
+  "moduleId": {
+    "$oid": "66cd98ad4e86f78c848d0065"
+  },
+  "semesterId": {
+    "$oid": "66cd98ad4e86f78c848d0052"
+  },
+  "description": "Class for Fundamentals of Cybersecurity",
+  "location": {
+    "$oid": "66e0f9875433d21542edda8b"
+  },
+  "fixedSchedule": {
+    "dayOfWeek": "Tuesday",
+    "startTime": "10:00 AM",
+    "endTime": "12:00 PM"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66ed51d09e05fde7d6b415d8"
+  },
+  "classId": "CY2S1C1",
+  "className": "Ethical Hacking Class",
+  "moduleId": {
+    "$oid": "66cd98ad4e86f78c848d0069"
+  },
+  "semesterId": {
+    "$oid": "66cd98ad4e86f78c848d0054"
+  },
+  "description": "Class for Ethical Hacking",
+  "location": {
+    "$oid": "66e0f9875433d21542edda8b"
+  },
+  "fixedSchedule": {
+    "dayOfWeek": "Wednesday",
+    "startTime": "10:00 AM",
+    "endTime": "12:00 PM"
+  },
+  "__v": 0
+}]

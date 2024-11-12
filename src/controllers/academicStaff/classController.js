@@ -3,6 +3,7 @@ const User = require('./../../models/User');
 const ClassSchedule = require('../../models/ClassSchedule');
 const uniResource = require('../../models/UniResource');
 
+
 //Get classes for an academic Staff MEmeber
 
 exports.getClasses = async (req, res) => {
@@ -96,7 +97,7 @@ exports.getExtraSchedules = async (req, res) => {
                 select: ['resourceName'] // Select relevant fields from Resource model
             });
 
-        
+
 
         // Check if schedules are found
         if (extraSchedules.length === 0) {
@@ -113,14 +114,17 @@ exports.getExtraSchedules = async (req, res) => {
 
 // add extra schedule for a class
 exports.addExtraSchedule = async (req, res) => {
-    const { classId, startTime, endTime, location } = req.body;
-
-    if (!classId || !startTime || !endTime || !location) {
+    const { classId, startTime, endTime, location, date } = req.body;
+    console.log("Date", date)
+    console.log("Start Time", startTime)
+    if (!classId || !startTime || !endTime || !location || !date) {
         return res.status(400).json({ error: 'Class ID, date, start time, end time, and location are required' });
     }
 
     try {
-        const newExtraSchedule = new ClassSchedule({ classId, startTime, endTime, location });
+
+       
+        const newExtraSchedule = new ClassSchedule({ classId, date, startTime, endTime, location });
         await newExtraSchedule.save();
         res.json(newExtraSchedule);
     } catch (error) {
@@ -174,7 +178,7 @@ exports.getLocations = async (req, res) => {
     }
 
     try {
-        const locations = await uniResource.find({ resourceType: 'Lab' });
+        const locations = await uniResource.find({ resourceType: 'Lab', availabilityStatus: 'available' });
         res.json(locations);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch locations' });
@@ -183,11 +187,7 @@ exports.getLocations = async (req, res) => {
 
 }
 
-
-
-
-
-// Get schedule details for a specific class by classId
+// Get extra class schedules
 exports.getClassScheduleDetails = async (req, res) => {
     const { classId } = req.query;
 
@@ -207,10 +207,10 @@ exports.getClassScheduleDetails = async (req, res) => {
 };
 
 
-// get class details by class Id
+// get fixed  class details by class Id
 exports.getClassDetails = async (req, res) => {
     const { classId } = req.query;
-    console.log("ClassId" ,classId);
+    console.log("ClassId", classId);
     try {
         const classDetails = await Class.findById(classId)
             .populate({ path: 'academicStaff', model: 'User', select: ['fName', 'lName'] })
@@ -218,13 +218,13 @@ exports.getClassDetails = async (req, res) => {
             .populate({ path: 'location', model: 'UniResource', select: ['resourceName'] })
             .populate('moduleId', ['moduleName'])
             .populate('semesterId', ['semesterId']);
-  
+
         if (!classDetails) {
             return res.status(404).json({ message: 'Class not found' });
         }
 
         res.json(classDetails);
-        console.log("Class Details",classDetails);
+        console.log("Class Details", classDetails);
     } catch (error) {
         console.error('Error fetching class details:', error);
         res.status(500).json({ message: 'Server error' });

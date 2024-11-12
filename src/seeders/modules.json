@@ -1,0 +1,337 @@
+[{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006b"
+  },
+  "moduleId": "CY2S2M1",
+  "moduleName": "Secure Software Development",
+  "description": "Secure coding practices.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0055"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005a"
+  },
+  "moduleId": "SEY1S1M2",
+  "moduleName": "Discrete Mathematics",
+  "description": "Mathematical structures for CS.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004c"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006d"
+  },
+  "moduleId": "CY3S1M1",
+  "moduleName": "Advanced Cryptography",
+  "description": "Advanced cryptography techniques.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0056"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0068"
+  },
+  "moduleId": "CY1S2M2",
+  "moduleName": "Operating Systems Security",
+  "description": "Security aspects of OS.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0053"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006a"
+  },
+  "moduleId": "CY2S1M2",
+  "moduleName": "Digital Forensics",
+  "description": "Basics of digital forensics.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0054"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005c"
+  },
+  "moduleId": "SEY1S2M2",
+  "moduleName": "Computer Architecture",
+  "description": "Basic computer architecture.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004d"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005e"
+  },
+  "moduleId": "SEY2S1M2",
+  "moduleName": "Database Management Systems",
+  "description": "Introduction to databases.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004e"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0063"
+  },
+  "moduleId": "SEY3S2M1",
+  "moduleName": "Advanced Software Engineering (Design Patterns)",
+  "description": "Software design patterns.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0051"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0066"
+  },
+  "moduleId": "CY1S1M2",
+  "moduleName": "Network Fundamentals",
+  "description": "Introduction to networking.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0052"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005b"
+  },
+  "moduleId": "SEY1S2M1",
+  "moduleName": "Data Structures and Algorithms",
+  "description": "Core CS concepts.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004d"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0060"
+  },
+  "moduleId": "SEY2S2M2",
+  "moduleName": "Web Development",
+  "description": "Front-end and back-end web development.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004f"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0069"
+  },
+  "moduleId": "CY2S1M1",
+  "moduleName": "Ethical Hacking",
+  "description": "Ethical hacking techniques.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0054"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0070"
+  },
+  "moduleId": "CY3S2M2",
+  "moduleName": "Penetration Testing",
+  "description": "Penetration testing methodologies.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0057"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006f"
+  },
+  "moduleId": "CY3S2M1",
+  "moduleName": "Incident Response and Management",
+  "description": "Incident response strategies.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0057"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0062"
+  },
+  "moduleId": "SEY3S1M2",
+  "moduleName": "Mobile Application Development",
+  "description": "Development of mobile apps.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0050"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0067"
+  },
+  "moduleId": "CY1S2M1",
+  "moduleName": "Cryptography Basics",
+  "description": "Introduction to cryptography.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0053"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005d"
+  },
+  "moduleId": "SEY2S1M1",
+  "moduleName": "Object-Oriented Programming",
+  "description": "Advanced programming techniques.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004e"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0061"
+  },
+  "moduleId": "SEY3S1M1",
+  "moduleName": "Software Project Management",
+  "description": "Managing software projects.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0050"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0064"
+  },
+  "moduleId": "SEY3S2M2",
+  "moduleName": "Cloud Computing and DevOps",
+  "description": "Introduction to cloud computing.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0051"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0065"
+  },
+  "moduleId": "CY1S1M1",
+  "moduleName": "Fundamentals of Cybersecurity",
+  "description": "Basic cybersecurity concepts.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0052"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d005f"
+  },
+  "moduleId": "SEY2S2M1",
+  "moduleName": "Software Engineering Principles",
+  "description": "Principles of software engineering.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004f"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0059"
+  },
+  "moduleId": "SEY1S1M1",
+  "moduleName": "Introduction to Programming",
+  "description": "Basic programming concepts.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d004c"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006e"
+  },
+  "moduleId": "CY3S1M2",
+  "moduleName": "Cloud Security",
+  "description": "Security in cloud environments.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0056"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d006c"
+  },
+  "moduleId": "CY2S2M2",
+  "moduleName": "Advanced Network Security",
+  "description": "Advanced networking security.",
+  "semester": {
+    "$oid": "66cd98ad4e86f78c848d0055"
+  },
+  "__v": 0,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  }
+}]

@@ -1,0 +1,121 @@
+[{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d004c"
+  },
+  "semesterId": "SEY1S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0045"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d004d"
+  },
+  "semesterId": "SEY1S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0045"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d004e"
+  },
+  "semesterId": "SEY2S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0046"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d004f"
+  },
+  "semesterId": "SEY2S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0046"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0050"
+  },
+  "semesterId": "SEY3S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0047"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0051"
+  },
+  "semesterId": "SEY3S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0047"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0052"
+  },
+  "semesterId": "CY1S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0048"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0053"
+  },
+  "semesterId": "CY1S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0048"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0054"
+  },
+  "semesterId": "CY2S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0049"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0055"
+  },
+  "semesterId": "CY2S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d0049"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0056"
+  },
+  "semesterId": "CY3S1",
+  "semesterNumber": 1,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d004a"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "66cd98ad4e86f78c848d0057"
+  },
+  "semesterId": "CY3S2",
+  "semesterNumber": 2,
+  "academicYear": {
+    "$oid": "66cd98ac4e86f78c848d004a"
+  },
+  "__v": 1
+}]

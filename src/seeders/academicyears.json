@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0045"
+  },
+  "academicYearId": "SEY1",
+  "yearNumber": 1,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0046"
+  },
+  "academicYearId": "SEY2",
+  "yearNumber": 2,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0047"
+  },
+  "academicYearId": "SEY3",
+  "yearNumber": 3,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0042"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0048"
+  },
+  "academicYearId": "CY1",
+  "yearNumber": 1,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d0049"
+  },
+  "academicYearId": "CY2",
+  "yearNumber": 2,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66cd98ac4e86f78c848d004a"
+  },
+  "academicYearId": "CY3",
+  "yearNumber": 3,
+  "course": {
+    "$oid": "66cd98ac4e86f78c848d0043"
+  },
+  "__v": 0
+}]
