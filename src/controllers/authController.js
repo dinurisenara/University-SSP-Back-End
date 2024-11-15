@@ -3,46 +3,46 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Otp = require('../models/Otp')
-const nodemailer =  require('nodemailer');
+const nodemailer = require('nodemailer');
 const asyncHandler = require('express-async-handler');
 const ROLES_LIST = require('../config/roles_list');
-const { v4: uuidv4 } = require('uuid'); 
-const Course = require('../models/Course');
+const { v4: uuidv4 } = require('uuid');
+const Course = require('../models/Course'); 
 
 
 // Register a new user
 
-exports.register = async(req,res) =>{
-    const {firstName , lastName , email , password , mobile , type, course} = req.body;
-
-    try{
-        let user = await User.findOne({email});
-        if(user){
-            return res.status(400).json({msg: 'User already exists'});
+exports.register = async (req, res) => {
+    const { firstName, lastName, email, password, mobile, type, course } = req.body;
+   
+    try {  
+        let user = await User.findOne({ email });
+        if (user) {  
+            return res.status(400).json({ msg: 'User already exists' });
         }
-        
+  
         const salt = await bcrypt.genSalt(10);
 
         const role = ROLES_LIST[type.replace(/\s+/g, '_')];
- // Dynamically assign role based on the provided type
+        // Dynamically assign role based on the provided type
 
-    
+
         const hashedPassword = await bcrypt.hash(password, salt);
 
-       
- 
-const enrolledCourse = role == 1984 ? await Course.findOne({courseId : course}).select('_id').lean() : null;
-const prefix = enrolledCourse ? course : (role == 2002 ?  'NA': (role == 2001 && 'AS'));
 
-//Generate a unique 10 digit number
 
-let userIdSuffix;
+        const enrolledCourse = role == 1984 ? await Course.findOne({ courseId: course }).select('_id').lean() : null;
+        const prefix = enrolledCourse ? course : (role == 2002 ? 'NA' : (role == 2001 && 'AS'));
 
-do {
-    userIdSuffix = Math.floor(Math.random() * 1000000000);
-  } while (await User.findOne({ username: `${prefix}${userIdSuffix}` }));
+        //Generate a unique 10 digit number
 
-  const userId = `${prefix}${userIdSuffix}`;
+        let userIdSuffix;
+
+        do {
+            userIdSuffix = Math.floor(Math.random() * 1000000000);
+        } while (await User.findOne({ username: `${prefix}${userIdSuffix}` }));
+
+        const userId = `${prefix}${userIdSuffix}`;
 
         console.log(enrolledCourse);
         user = new User({
@@ -50,18 +50,18 @@ do {
             fName: firstName,
             lName: lastName,
             email: email,
-            password: hashedPassword ,
+            password: hashedPassword,
             mobile: mobile,
             type: role,
             course: enrolledCourse
-        
+
         });
 
         await user.save();
 
-       res.json({msg: 'User registered successfully'});
+        res.json({ msg: 'User registered successfully' });
 
-    }catch(error){
+    } catch (error) {
         console.error(error.message);
         res.status(500).send('Server error');
     }
@@ -72,26 +72,26 @@ do {
 
 //Email configuration 
 const transporter = nodemailer.createTransport({
- service:'Gmail',
- auth:{
-    user:process.env.EMAIL,
-    pass:process.env.EMAIL_PASSWORD
- }
+    service: 'Gmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
+    }
 });
 
 
 //Generate and send OTP
 
-exports.sendOtp = async(req,res)=>{
-    const {email} = req.body;
+exports.sendOtp = async (req, res) => {
+    const { email } = req.body;
 
-    try{
-        
+    try {
+
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
         const newOtp = new Otp({
-            email: email ,
+            email: email,
             otp
         })
 
@@ -104,14 +104,14 @@ exports.sendOtp = async(req,res)=>{
             text: `Your OTP is ${otp}`
         };
 
-        transporter.sendMail(mailOptions , (error, info)=>{
-            if(error){
-                return res.status(500).json({msg:'Server Error'});
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).json({ msg: 'Server Error' });
             }
-            res.json({msg:'Otp sent'});
-        });      
+            res.json({ msg: 'Otp sent' });
+        });
 
-    }catch(error){
+    } catch (error) {
         console.error(error.message);
         res.status(500).send('Server error');
     }
@@ -120,34 +120,34 @@ exports.sendOtp = async(req,res)=>{
 
 //Verify OTP 
 
-exports.verifyOtp = async(req,res) =>{
-    const {email , otp } = req.body;
+exports.verifyOtp = async (req, res) => {
+    const { email, otp } = req.body;
 
-    try{       
+    try {
 
-        const validOtp = await Otp.findOne({email: email, otp});
-        if(!validOtp){
-            return res.status(400).json({msg: 'Invalid OTP'});
+        const validOtp = await Otp.findOne({ email: email, otp });
+        if (!validOtp) {
+            return res.status(400).json({ msg: 'Invalid OTP' });
         }
-        
 
-        await Otp.deleteOne({_id: validOtp.id});//Remove the used OTP
 
-        const payload ={
+        await Otp.deleteOne({ _id: validOtp.id });//Remove the used OTP
+
+        const payload = {
             user: {
-                email: email,                
+                email: email,
             }
         };
 
-        return res.status(200).json({msg: ' verified', payload});
+        return res.status(200).json({ msg: ' verified', payload });
 
-   
+
     }
-    catch(error){
+    catch (error) {
         console.error(error.message);
         res.status(500).send('Server error');
     }
-   
+
 
 
 };
@@ -158,20 +158,20 @@ exports.verifyOtp = async(req,res) =>{
 exports.login = async (req, res) => {
     const { userId, password } = req.body;
 
-  
+
 
     try {
         let user = await User.findOne({ userId });
-        console.log("user matching the user ID" , user);
+        console.log("user matching the user ID", user);
 
-        if(!user){
-            return res.status(400).json({msg: 'Invalid credentials no user to match teh user id'});
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials no user to match teh user id' });
         }
 
-        if(user.accountStatus == 'inactive'){
-            return res.status(400).json({msg: 'Account is inactive'});
+        if (user.accountStatus == 'inactive') {
+            return res.status(400).json({ msg: 'Account is inactive' });
         }
-        
+
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials no user to match teh user id' });
         }
@@ -186,13 +186,13 @@ exports.login = async (req, res) => {
         const payload = {
             user: {
                 id: user._id,
-                userId: user.userId,  
+                userId: user.userId,
                 email: user.email,
                 type: user.type,
                 department: user.department
-            }   
+            }
         };
-console.log(payload)
+        console.log(payload)
         const accessToken = jwt.sign(
             payload, process.env.JWT_SECRET, { expiresIn: '1h' }
         );
@@ -212,55 +212,55 @@ console.log(payload)
         res.json({ accessToken });
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({msg:'Server Error'});
+        res.status(500).json({ msg: 'Server Error' });
     }
 };
 
 
-exports.refresh = async (req,res) =>{ 
-   const cookies = req.cookies
-   
-   if(!cookies.jwt){
-       return res.status(401).json({msg:'Unauthorized'});
+exports.refresh = async (req, res) => {
+    const cookies = req.cookies
 
-   }
-   const refreshToken = cookies.jwt;
+    if (!cookies.jwt) {
+        return res.status(401).json({ msg: 'Unauthorized' });
+
+    }
+    const refreshToken = cookies.jwt;
 
     jwt.verify(
-    refreshToken,process.env.REFRESH_SECRET,
-    asyncHandler(async(error,decoded)=>{
-        if (error){
-            return res.status(403).json({msg:'Forbidden'});
-        }
-        const foundUser = await User.findOne({email:decoded.user.email});
-        if(!foundUser){
-            return res.status(401).json({msg:'Unauthorized'});
-        }
+        refreshToken, process.env.REFRESH_SECRET,
+        asyncHandler(async (error, decoded) => {
+            if (error) {
+                return res.status(403).json({ msg: 'Forbidden' });
+            }
+            const foundUser = await User.findOne({ email: decoded.user.email });
+            if (!foundUser) {
+                return res.status(401).json({ msg: 'Unauthorized' });
+            }
 
-        const accessToken = jwt.sign(
-            {
-                user:{
-                    email:foundUser.email,
-                    id:foundUser._id,
-                    userId:foundUser.userId,
-                    type:foundUser.type
-                },
-   
-            
-            }, process.env.JWT_SECRET,{expiresIn:'1h'}
-        )
+            const accessToken = jwt.sign(
+                {
+                    user: {
+                        email: foundUser.email,
+                        id: foundUser._id,
+                        userId: foundUser.userId,
+                        type: foundUser.type
+                    },
 
-        res.json({accessToken});
-    })
-   )
+
+                }, process.env.JWT_SECRET, { expiresIn: '1h' }
+            )
+
+            res.json({ accessToken });
+        })
+    )
 }
 
-exports.logout = async(req,res) =>{
+exports.logout = async (req, res) => {
     const cookies = req.cookies;
-    if(!cookies.jwt){
+    if (!cookies.jwt) {
         return res.status(204) // No content
     }
-        res.clearCookie('jwt',{httpOnly:true,secure:true,sameSite:'none'});
-        res.json({msg:'Logged out'});
-    
+    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'none' });
+    res.json({ msg: 'Logged out' });
+
 }

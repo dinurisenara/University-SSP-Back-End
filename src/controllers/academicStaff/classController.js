@@ -32,10 +32,6 @@ exports.getClasses = async (req, res) => {
                 path: 'location', // Assuming 'location' is the correct field name in your schema
                 model: 'UniResource',
                 select: 'resourceName'
-            }, {
-                path: 'students',
-                model: 'User',  // Assuming that the students are stored in the 'User' model
-                select: ['fName', 'lName', 'userId'] // Populate the fName and lName of each student
             }]);
         console.log("Classes:", classes);
 
@@ -123,7 +119,7 @@ exports.addExtraSchedule = async (req, res) => {
 
     try {
 
-       
+
         const newExtraSchedule = new ClassSchedule({ classId, date, startTime, endTime, location });
         await newExtraSchedule.save();
         res.json(newExtraSchedule);
@@ -213,8 +209,7 @@ exports.getClassDetails = async (req, res) => {
     console.log("ClassId", classId);
     try {
         const classDetails = await Class.findById(classId)
-            .populate({ path: 'academicStaff', model: 'User', select: ['fName', 'lName'] })
-            .populate({ path: 'students', model: 'User', select: ['fName', 'lName', 'userId'] })
+            .populate({ path: 'academicStaff', model: 'User', select: ['fName', 'lName'] })            
             .populate({ path: 'location', model: 'UniResource', select: ['resourceName'] })
             .populate('moduleId', ['moduleName'])
             .populate('semesterId', ['semesterId']);
@@ -222,6 +217,8 @@ exports.getClassDetails = async (req, res) => {
         if (!classDetails) {
             return res.status(404).json({ message: 'Class not found' });
         }
+        const students = await User.find({semester:classDetails.semesterId});
+        classDetails.students = students;
 
         res.json(classDetails);
         console.log("Class Details", classDetails);

@@ -9,10 +9,23 @@ exports.getUserDetails = async (req, res) => {
         console.log("getUSerlog",req);
         console.log(id)
         // Find the user  by userID (not by _id)
-        const user = await User.findById(id).select('-password').populate({
-            path: 'course',      // The field you want to populate
-            select: 'courseName' // Select specific fields to return
-          }); // Exclude the password
+        const user = await User.findById(id).select('-password').populate([
+            {
+              path: 'course', // The field you want to populate
+              select: 'courseName', // Select specific fields to return
+            },
+            {
+              path: 'semester',           
+              select: 'semesterNumber', // Select specific fields to return
+            },{
+                path:'academicYear',
+                select:'yearNumber'
+            },
+            {
+              path:'modules',
+              select:'moduleName'
+            }
+          ]); // Exclude the password
         if (!user) {
             return res.status(400).json({ msg: 'User not found' });
         }

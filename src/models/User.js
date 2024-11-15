@@ -26,6 +26,7 @@ const UserSchema = new Schema({
 
     course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
     semester:{type: mongoose.Schema.Types.ObjectId, ref: 'Semester'},
+    academicYear: { type: mongoose.Schema.Types.ObjectId, ref: 'AcademicYear' },
 
     //Non academic staff 
    department: { type: String , enum:['Admisssion' ,'Resource Management' , 'Administration' , 'Management' ]},
