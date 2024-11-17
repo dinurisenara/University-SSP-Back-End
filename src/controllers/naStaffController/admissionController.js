@@ -39,7 +39,10 @@ exports.toggleAccountStatus = async (req, res) => {
 exports.getInactiveUsers = async (req, res) => {
     try {
         // Find users with 'inactive' account status and sort by creation time in descending order
-        const inactiveUsers = await User.find({ accountStatus: 'inactive' })
+        const inactiveUsers = await User.find({ accountStatus: 'inactive' }).populate({
+            path: 'course',
+            select: 'courseName -_id',
+        })
             .sort({ _id: -1 }); // -1 for descending (most recent first)
 
         // If no inactive users found
@@ -88,6 +91,54 @@ exports.getInactiveUsers = async (req, res) => {
         console.log(`Activation email sent to ${userEmail}`);
     } catch (error) {
         console.error('Error sending email:', error);
+    }
+};
+
+
+
+///User accont Deactivation 
+
+exports.getActiveUsers = (req,res) =>{
+
+    User.find({accountStatus: 'active'}).then((users) => {
+        res.status(200).json({
+            message: 'Active users retrieved successfully',
+            success: true,
+            data: users
+        });
+    }).catch((error) => {
+        console.error('Error fetching active users:', error);
+        return res.status(500).json({ message: 'Server error', success: false });
+    });
+
+
+}
+exports.deactivateAccount = async (req, res) => {
+    try {
+        const { userId } = req.query; // Assuming you're passing the userId as a route param
+        console.log("userId for deactivating ",userId);
+
+        console.log("userId for deactivating ",userId);
+        // Find the user by userId
+        const user = await User.findOne({ _id: userId });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found', success: false });
+        }
+
+        // Deactivate the account
+        user.accountStatus = 'inactive';
+
+        // Save the updated user
+        await user.save();
+
+        return res.status(200).json({
+            message: 'Account deactivated successfully',
+            success: true,
+        });
+    } catch (error) {
+        console.error('Error deactivating account:', error);
+        return res.status(500).json({ message: 'Server error', success: false });
     }
 };
 

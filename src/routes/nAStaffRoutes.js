@@ -6,7 +6,7 @@ const router = express.Router();
 const verifyRole = require('../middleware/verifyRoles');
 const { getStudentCountbyAcademicYear } = require('../controllers/naStaffController/getStudentCount.js');
 const { getResources , getResourceRequests , handleResourceRequest, changeResourceStatus ,  } = require('../controllers/naStaffController/getResources.js');
-const { getInactiveUsers, toggleAccountStatus, sendActivationEmail } = require('../controllers/naStaffController/admissionController.js');
+const { getInactiveUsers, toggleAccountStatus, sendActivationEmail, deactivateAccount, getActiveUsers } = require('../controllers/naStaffController/admissionController.js');
 
 
 router.use(verifyJWT)
@@ -21,6 +21,9 @@ router.put('/handle-resource-requests',verifyRole(ROLES_LIST.NAcademicStaff),han
 //Asmission department routes
 router.get('/admission/view-new-admissions',verifyRole(ROLES_LIST.NAcademicStaff),getInactiveUsers);
 router.put('/admission/toggle-account-status',verifyRole(ROLES_LIST.NAcademicStaff),toggleAccountStatus);
+router.get('/admission/view-active-admissions', verifyRole(ROLES_LIST.NAcademicStaff),getActiveUsers)
+router.put('/admission/deactivate-account',verifyRole(ROLES_LIST.NAcademicStaff), deactivateAccount);
+
 
 
 

@@ -13,20 +13,19 @@ exports.getAssessmentStudents = async (req, res) => {
 
     try {
         // Fetch the moduleId from the assessment
-        const assessment = await Assessment.findById(assessmentId).select('moduleId').lean();
+        const assessment = await Assessment.findById(assessmentId).populate({
+            path: 'moduleId',
+            select: 'semester'
+        });
         if (!assessment || !assessment.moduleId) {
             return res.status(404).json({ error: 'Assessment not found or missing moduleId' });
         }
-        const { moduleId } = assessment;
+    
 
-        // Find the semester containing the module
-        const semester = await Semester.findOne({ modules: moduleId }).select('_id').lean();
-        if (!semester) {
-            return res.status(404).json({ error: 'No semester found for the given moduleId' });
-        }
+       
 
         // Find students in the semester
-        const studentsPromise = User.find({ semester: semester._id }).lean();
+        const studentsPromise = User.find({ semester: assessment.moduleId.semester}).lean();
 
         // Find grades for the assessment
         const gradesPromise = AssessmentGrades.find({ assessmentId: assessmentId }).lean();
