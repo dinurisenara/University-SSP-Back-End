@@ -50,19 +50,20 @@ exports.getResourceRequests = async (req, res) => {
        .populate([
            {
                path: 'resourceId',
+               model:'UniResource',
                select: 'resourceName resourceType availabilityStatus description resourceOwner',
            },
            {
                path: 'studentId',
                model: 'User',
-               select: 'fName lName email', // Select desired fields from the student user
+               select: 'userId fName lName email', // Select desired fields from the student user
            }
        ])
        .lean();
-
+console.log("Requests", requests)
    // Filter out requests where `resourceOwner` doesn’t match `userId`
    const filteredRequests = requests.filter(
-       request =>  request.resourceId.resourceOwner.toString() == userId
+       request =>  request.resourceId.resourceOwner == userId
    );
   
 

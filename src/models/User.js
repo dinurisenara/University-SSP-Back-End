@@ -36,9 +36,12 @@ const UserSchema = new Schema({
    modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module' }],
 
 
-   
+   resetPasswordToken: { type: String },
+   resetPasswordExpires: { type: Date },   
    
 });    
+
+
     
 
 module.exports = mongoose.model('User', UserSchema);
