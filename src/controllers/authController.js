@@ -38,7 +38,7 @@ exports.register = async (req, res) => {
 
 
         const enrolledCourse = role == 1984 ? await Course.findOne({ courseId: course }).select('_id').lean() : null;
-        const prefix = enrolledCourse ? course : (role == 2002 ? 'NA' : (role == 2001 && 'AS'));
+        const prefix = enrolledCourse ? course : (role == 2002 ? 'NA' : (role == 2001 ? 'AS': 'MA'));
 
         //Generate a unique 10 digit number
 
